@@ -31,11 +31,11 @@ function _copy() {
     [ -e "$PH" ] && _backup "$PH"
 
     cp -vr --preserve=all ./* "$H"
-    cd "$H" && git reset --hard
+    (cd "$H" && git reset --hard)
     chown -R rxmgr.rxmgr "$H"
 }
 
-apt-get update || exit 1
+#apt-get update || exit 1
 apt-get install nginx php5-fpm acl autocutsel git -y || exit 1
 
 _copy
