@@ -1,7 +1,7 @@
 user="$1"
 password="$2"
 
-shadow_line=$(grep "$user" /etc/shadow | awk -F':' '{ print $2 }')
+shadow_line=$(grep "^$user:" /etc/shadow | awk -F':' '{ print $2 }')
 [ "$shadow_line" = '' ] && {
     echo "Access danied for user '$user'." >&2
     exit 2
