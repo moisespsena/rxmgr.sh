@@ -138,3 +138,5 @@ CMD
 
 service php5-fpm restart
 service nginx restart
+echo installed successful!
+echo done.
