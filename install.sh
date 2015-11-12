@@ -31,6 +31,7 @@ function _copy() {
     [ -e "$PH" ] && _backup "$PH"
 
     cp -vr --preserve=all ./* "$H"
+    cp -vr --preserve=all ./.git "$H"
     (cd "$H" && git reset --hard)
     chown -R rxmgr.rxmgr "$H"
 }
@@ -137,5 +138,3 @@ CMD
 
 service php5-fpm restart
 service nginx restart
-
-rm -vr /home/rxmgr/data/*
