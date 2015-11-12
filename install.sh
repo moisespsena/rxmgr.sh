@@ -134,7 +134,9 @@ pm.max_spare_servers = 3
 chdir = /
 CMD
 
-(cd /etc/nginx; ln -vs sites-available/rxmgr.conf sites-enabled/rxmgr)
+[ -e '/etc/nginx/sites-enabled/rxmgr' ] && rm -v /etc/nginx/sites-enabled/rxmgr
+ls -1 /etc/nginx/sites-enabled
+ln -vs /etc/nginx/sites-available/rxmgr.conf /etc/nginx/sites-enabled/rxmgr
 
 service php5-fpm restart
 service nginx restart
