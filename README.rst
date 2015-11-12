@@ -8,6 +8,8 @@ Foi testado apenas em distribuição derivada do **Debian**.
 
 A instalação é simples, veja:
 
+.. code-block:
+
     git clone https://github.com/moisespsena/rxmgr.sh
     cd rxmgr.sh
     sudo ./install.sh
