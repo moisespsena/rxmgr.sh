@@ -1,5 +1,5 @@
 <?php
-function pre_html($title) {
+function pre_html($title, $topbar=true, $help=true) {
 ?>
 <!doctype html>
 
@@ -66,15 +66,65 @@ function pre_html($title) {
 </head>
 
 <body>
-<?php if($title) { ?><h1><?php echo $title; ?></h1><?php } ?>
+<?php if($topbar) { ?>
+    <div id="top-header">
+    <?php if($title) { ?><h1><?php echo $title; ?></h1><?php } ?>
+    </div>
+<?php } ?>
+<div id="panel"></div>
 <div id="main">
+    <?php if($help) { ?>
+    <div><a href="#" class="toggle-help">Ajuda</a></div>
+    <div id="help" style="display:none">
+        <a href="#" class="close toggle-help">Fechar</a>
+        <h2>Como acessar</h2>
+        <h3>Do Linux</h3>
+        <ol>
+            <li>Instale o aplicativo chamado <b>vinagre</b>;</li>
+            <li>Clique no botão <b>conectar</b>;</li>
+            <li>Em <b>protocolo</b>, escola <b>VNC</b>;</li>
+            <li>em <b>Máquina</b>, coloque o IP (ou dominio) e PORTA, conforme mostrado na página inicial, seguindo o modelo (IP:PORTA, exemplo: <b>192.168.1.5:5901</b>);</li>
+            <li>Escola a <b>Profundidade da cor</b> para definir a qualidade da conexão. Quando melhor, mais lenta;</li>
+            <li>Clique em <b>Conectar</b>.</li>
+            <li>Ao solicitar a senha, entre com a senha do usuário correspondente.</li>
+        </ol>
+        <h3>Do Windows</h3>
+        <ol>
+            <li>Acesse a <a href="http://www.tightvnc.com/download.php">página de download</a> do <b>TightVNC</b>, faça o download do <b>TightVNC</b> e do <b>DFMirage driver</b>;</li>
+            <li>Instale os executáveis.</li>
+            <li>Acesse o menu inciar e procure por <b>TightVNC</b>, clique em <b>Tight VNV Viewer</b>;</li>
+            <li>Em <b>Remote Host</b>, coloque o IP (ou dominio) e PORTA, conforme mostrado na página inicial, seguindo o modelo (IP:PORTA, exemplo: <b>192.168.1.5:5901</b>);</li>
+            <li>Clique em <b>connect</b>;</li>
+            <li>Ao solicitar a senha, entre com a senha do usuário correspondente.</li>
+        </ol> 
+        <h2>Envio e Download de Arquivos</h2>
+        <h3>Servidor de FTP</h3>
+        <p>Por padrao, o servidor de FTP está rodando em <code><?php echo $_SERVER['HTTP_HOST']; ?></code>na porta <code>21</code>.</p>
+        <p><b>Login</b> e <b>senha</b> são os mesmos da Área de Trabalho remota</p>
+        <h3>Acesso</h3>
+        <h4>Do Linux</h4>
+        <p>Instale o pacote <b>filezilla</b>: <code>sudo apt-get install filezilla</code></p>
+        <h4>Do Windows</h4>
+        <p>Instale o <a href="https://filezilla-project.org/download.php?show_all=1" title="Ir para a pagina de Download do Filezilla"><b>filezilla</b></a>.</p>
+        <h2>Configuração no Servidor</h2>
+        <p>Defina o <b>/home/[USUARIO]/.vnc/xstartup</b> conforme o modelo abaixo:</p>
+        <pre>
+#!/bin/sh
+xrdb $HOME/.Xresources
+xsetroot -solid grey
+# Fix to make GNOME work
+export XKL_XMODMAP_DISABLE=1
+autocutsel -fork
+# inicia o lxde como gerenciador de sessão
+startlxde
+        </pre>
+    </div>
+<?php } ?>
 <?php
 }
 
 function end_html() {
 ?>
-</div>
-<div id="panel">
 </div>
 <div class="txt-center" id="footer" style="border-top: 1px solid #999">
 Desenvolvido por &copy;Moisés Paes Sena - <a href="http://moisespsena.com">moisespsena.com</a>
@@ -83,3 +133,4 @@ Desenvolvido por &copy;Moisés Paes Sena - <a href="http://moisespsena.com">mois
 </html>
 <?php
 }
+

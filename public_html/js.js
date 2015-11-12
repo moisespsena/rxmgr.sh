@@ -235,6 +235,11 @@ var ACTIONS = {
 
 
 $(function() {
+    $('.toggle-help').click(function() {
+        var $help = $('#help');
+        if($help.is(':visible')) $help.hide();
+        else $help.show();
+    });
     $('[data-action]').click(function() {
         var attrs = $(this).getAttributes();
         if((attrs.action in ACTIONS)) {

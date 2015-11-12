@@ -10,6 +10,15 @@ body, html {
     float: right;
 }
 
+#body-content {
+    padding: 10px;
+}
+
+#help {
+    padding: 10px;
+    border: 2px solid #666;
+}
+
 .txt-center {
     text-align: center;
 }

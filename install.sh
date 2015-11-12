@@ -39,6 +39,33 @@ function _copy() {
 #apt-get update || exit 1
 apt-get install nginx php5-fpm acl autocutsel git -y || exit 1
 
+which pure-pw >/dev/null || {
+    apt-get install pure-ftpd
+    echo "yes" > /etc/pure-ftpd/conf/ChrootEveryone
+    echo "yes" > /etc/pure-ftpd/conf/KeepAllFiles
+    echo "30000 30200" > /etc/pure-ftpd/conf/PassivePortRange
+}
+
+(
+"$B/list_users.sh" | while read l; do
+   user=$(echo "$l" | cut -d: -f 1)
+   home=$(echo "$l" | cut -d: -f 2)
+   [ ! -d "$home/.vnc" ] && mkdir -pv "$home/.vnc"
+   echo '
+#!/bin/sh
+xrdb $HOME/.Xresources
+xsetroot -solid grey
+# Fix to make GNOME work
+export XKL_XMODMAP_DISABLE=1
+autocutsel -fork
+# inicia o lxde como gerenciador de sessão
+startlxde
+' > "$home/.vnc/xstartup"
+   chmod +x "$home/.vnc/xstartup"
+   chown -R "$user.$user" $home/.vnc
+done
+)
+
 _copy
 
 echo 'stop rxmgr' | supervisorctl

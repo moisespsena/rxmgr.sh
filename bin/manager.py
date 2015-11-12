@@ -8,8 +8,9 @@ from collections import OrderedDict as OD
 import time
 
 
-DEBUG = True
-
+DEBUG = os.env.get('RXMGR_DEBUG', '0') == '1'
+BIN_DIR = os.path.dirname(__file__)
+HOME_DIR = os.path.dirname(BIN_DIR)
 
 class str_lines(str):
     def lines(self):
@@ -165,9 +166,7 @@ class Manager(object):
         return 0
 
     def list_system_users(self):
-        cmd = ("""awk -F: '$2 != "*" && $2 !~ /^!/ { print $1 }' /etc/shadow | """
-              """grep -v root""")
-        r = root_call(cmd)
+        r = root_call("'%s/list_users.sh' | cut -d: -f 1" % BIN_DIR)
         return r.out.strip('\n').split('\n')
 
     def list_users(self, password=False):
@@ -182,7 +181,7 @@ class Manager(object):
         return r
 
     def system_check_password(self, user, password):
-        r = root_call("%s/passwdcheck.sh '%s' '%s'" % (os.path.dirname(__file__), user, password))
+        r = root_call("%s/passwdcheck.sh '%s' '%s'" % (BIN_DIR, user, password))
         return r.status == 0
 
 
