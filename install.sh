@@ -36,7 +36,7 @@ function _copy() {
     chown -R rxmgr.rxmgr "$H"
 }
 
-#apt-get update || exit 1
+apt-get update || exit 1
 apt-get install nginx php5-fpm acl autocutsel git lxde-common -y || exit 1
 
 which pure-pw >/dev/null || {
