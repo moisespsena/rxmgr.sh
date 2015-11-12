@@ -51,8 +51,7 @@ which pure-pw >/dev/null || {
    user=$(echo "$l" | cut -d: -f 1)
    home=$(echo "$l" | cut -d: -f 2)
    [ ! -d "$home/.vnc" ] && mkdir -pv "$home/.vnc"
-   echo '
-#!/bin/sh
+   echo '#!/bin/sh
 xrdb $HOME/.Xresources
 xsetroot -solid grey
 # Fix to make GNOME work

@@ -106,18 +106,6 @@ function pre_html($title, $topbar=true, $help=true) {
         <p>Instale o pacote <b>filezilla</b>: <code>sudo apt-get install filezilla</code></p>
         <h4>Do Windows</h4>
         <p>Instale o <a href="https://filezilla-project.org/download.php?show_all=1" title="Ir para a pagina de Download do Filezilla"><b>filezilla</b></a>.</p>
-        <h2>Configuração no Servidor</h2>
-        <p>Defina o <b>/home/[USUARIO]/.vnc/xstartup</b> conforme o modelo abaixo:</p>
-        <pre>
-#!/bin/sh
-xrdb $HOME/.Xresources
-xsetroot -solid grey
-# Fix to make GNOME work
-export XKL_XMODMAP_DISABLE=1
-autocutsel -fork
-# inicia o lxde como gerenciador de sessão
-startlxde
-        </pre>
     </div>
 <?php } ?>
 <?php
