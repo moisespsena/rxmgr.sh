@@ -30,8 +30,8 @@ function _copy() {
     [ -e "$B" ] && _backup "$B"
     [ -e "$PH" ] && _backup "$PH"
 
-    cp -vr --preserve=all ./* "$H"
-    cp -vr --preserve=all ./.git "$H"
+    cp -r --preserve=all ./* "$H"
+    cp -r --preserve=all ./.git "$H"
     (cd "$H" && git reset --hard)
     chown -R rxmgr.rxmgr "$H"
 }
@@ -64,6 +64,8 @@ startlxde
    chown -R "$user.$user" $home/.vnc
 done
 )
+
+echo "copiando arquivos..."
 
 _copy
 
