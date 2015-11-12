@@ -8,7 +8,7 @@ from collections import OrderedDict as OD
 import time
 
 
-DEBUG = os.env.get('RXMGR_DEBUG', '0') == '1'
+DEBUG = os.environ.get('RXMGR_DEBUG', '0') == '1'
 BIN_DIR = os.path.dirname(__file__)
 HOME_DIR = os.path.dirname(BIN_DIR)
 
