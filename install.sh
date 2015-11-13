@@ -37,7 +37,7 @@ function _copy() {
 }
 
 apt-get update || exit 1
-apt-get install nginx php5-fpm acl autocutsel git lxde-common -y || exit 1
+apt-get install nginx php5-fpm acl autocutsel git lxde-common tightvncserver xtightvncviewer cifs-utils -y || exit 1
 
 which pure-pw >/dev/null || {
     apt-get install pure-ftpd
