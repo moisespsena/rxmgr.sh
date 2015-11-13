@@ -47,9 +47,12 @@ which pure-pw >/dev/null || {
 }
 
 (
+echo "Configure VNC xstartup"
+
 "$B/list_users.sh" | while read l; do
    user=$(echo "$l" | cut -d: -f 1)
    home=$(echo "$l" | cut -d: -f 2)
+   echo "--> $home"
    [ ! -d "$home/.vnc" ] && mkdir -pv "$home/.vnc"
    echo '#!/bin/sh
 xrdb $HOME/.Xresources
