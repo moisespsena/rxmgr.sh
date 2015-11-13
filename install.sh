@@ -26,7 +26,7 @@ function _backup() {
 }
 
 function _copy() {
-    [ ! -e "$O" ] && mkdiv -v "$O"
+    [ ! -e "$O" ] && mkdir -v "$O"
     [ -e "$B" ] && _backup "$B"
     [ -e "$PH" ] && _backup "$PH"
 
