@@ -1,4 +1,13 @@
 <?php
+/**
+ * RXMG - Remote X Manager
+ *
+ * Remote X Manager é um facilitador para criação de 
+ * Áreas de Trabalho virtuais usando o TightVNC.
+ * 
+ * Author: Moisés P. Sena <moisespsena@gmail.com>
+ * Licensa: MIT
+**/
 
 $sock_file = getenv('RXMGR_SERVER_SOCK_FILE');
 

@@ -1,3 +1,13 @@
+"""
+RXMG - Remote X Manager
+
+Remote X Manager é um facilitador para criação de 
+Áreas de Trabalho virtuais usando o TightVNC.
+
+Author: Moisés P. Sena <moisespsena@gmail.com>
+Licensa: MIT
+"""
+
 import sys
 import re
 import subprocess
@@ -74,7 +84,7 @@ def run(cmd='', username=None, usercmd='', pre=None, pos=None, upre=None, upos=N
         pre(p, c)
 
     if username:
-        c("su - '%s' -c 'cat | bash'\n" % username)
+        c("su - '%s' -c 'cat | bash'; exit $?\n" % username)
         c('cd ~\n')
         c('export HOME=$(pwd)\n')
 
@@ -87,7 +97,7 @@ def run(cmd='', username=None, usercmd='', pre=None, pos=None, upre=None, upos=N
         if upos:
             upos(p, c)
 
-        c('exit\n')
+        c('exit $?\n')
 
     if pos:
         pos(p, c)
@@ -283,6 +293,7 @@ def create_display(user, args='', password=None):
     if not password:
         password = M.get_user_password(user)
 
+    user_call(user, password, '"%s/xstartup-check.sh"' % BIN_DIR).check()
     user_call(user, password, 'vncserver %s' % args).check()
 
     display = None
